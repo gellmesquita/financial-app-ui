@@ -94,7 +94,7 @@ class _MyAppState extends State<MyApp> {
                   ),
                   trailing: Text(
                     getList()[index].fee!,
-                    style:const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w800,
                       color: (getList()[index].buy) ? Colors.red: Colors.green

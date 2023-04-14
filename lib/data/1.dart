@@ -3,5 +3,5 @@ class Money {
   String? nome;
   String? time;
   String? fee;
-  bool? buy;
+  bool buy=false;
 }
