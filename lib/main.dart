@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:financialapp/data/listData.dart';
-
+import "package:financialapp/screens/statistic.dart";
 
 
 void main(List<String> args) {
@@ -14,7 +14,7 @@ class FinanciallApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home:MyApp()
+      home:Statistic()
     );
   }
 }
@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     child: Image.asset(
-                      "images/${getList()[index].image!}",
+                      "images/${getList()[index].image}",
                       height: 40,
                     ),
                   ),
