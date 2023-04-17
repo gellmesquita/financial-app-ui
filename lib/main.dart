@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:financialapp/widgtes/chart.dart';
 import 'package:financialapp/data/listData.dart';
 import "package:financialapp/screens/statistic.dart";
 

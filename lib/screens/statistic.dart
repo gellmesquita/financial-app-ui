@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+import 'package:financialapp/widgtes/chart.dart';
+import 'package:financialapp/data/top.dart';
 
 class Statistic extends StatefulWidget {
   const Statistic({super.key});
@@ -116,9 +116,72 @@ class _StatisticState extends State<Statistic> {
                       )
                     ],
                   ),
-                )
+                ),
+                const Chart(),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        "Melhores Periodos",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      Icon(
+                        Icons.swap_vert,
+                        size: 25,
+                        color: Colors.grey,
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return  ListTile(
+                  leading: Image.asset(
+                    "images/${myData()[index].image}",
+                    width: 40,
+                    height: 40,
+                  ),
+                  title: Text(
+                    myData()[index].nome!,
+                    style: const TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  trailing:Text(
+                    myData()[index].fee!,
+                    style:  TextStyle(
+                      fontSize: 16,
+                      color: myData()[index].buy ? Colors.red: Colors.green,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  subtitle: Text(
+                    myData()[index].time!,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey
+                    ),
+                  ),
+                );
+              },
+              childCount: myData().length
+            ),
+
           )
         ],
        ),
