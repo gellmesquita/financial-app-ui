@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:financialapp/widgtes/chart.dart';
 import 'package:financialapp/data/listData.dart';
 import "package:financialapp/screens/statistic.dart";
-
+import 'package:financialapp/widgtes/bottomNavigation.dart';
 
 void main(List<String> args) {
   runApp(const FinanciallApp());
@@ -14,7 +14,7 @@ class FinanciallApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home:Statistic()
+      home:BottomNav()
     );
   }
 }
