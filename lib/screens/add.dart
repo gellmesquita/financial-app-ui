@@ -11,14 +11,18 @@ class Add extends StatefulWidget {
 class _AddState extends State<Add> {
   String dropdownValue = 'food';
   final TextEditingController text= TextEditingController();
+  final TextEditingController valor= TextEditingController();
   FocusNode ex = FocusNode();
+  FocusNode ex1 = FocusNode();
+  DateTime date = DateTime.now();
   @override
   void initState(){
     super.initState();
     ex.addListener(() { 
-      setState(() {
-        
-      });
+      setState(() {});
+    });
+    ex1.addListener(() { 
+      setState(() {});
     });
   }
   @override
@@ -60,67 +64,18 @@ class _AddState extends State<Add> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            Container(
-              height:60,
-              width: 300,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(width: 1, color: Colors.grey)
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: DropdownButton<String>(
-                  value: dropdownValue,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dropdownValue = newValue!;
-                    });
-                  },
-                  hint: const Text(
-                    "Selecione uma opção",
-                    style: TextStyle(
-                      color: Colors.grey
-                    ),
-                  ),
-                  isExpanded: true,
-                  dropdownColor: Colors.white,
-                  underline: Container(),
-                  items: ['food', 'Transfer', 'Education', 'Transportation'].map((String value) {
-                  return DropdownMenuItem(
-                    value: value,
-                    child: SizedBox(
-                      child:Row(
-                        children: [
-                          SizedBox(
-                            width: 30,
-                            child: Image.asset("images/$value.png"),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            value,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey,
-                              fontWeight: FontWeight.bold
-                            ),
-                          )
-                        ],
-                      )
-                      
-                    ),
-                  );
-                 }).toList(),
-                           ),
-              )
+            myDrop(),
+            const SizedBox(
+              height: 15,
             ),
+            myTextField(text, ex),
             const SizedBox(
               height: 15,
             ),
             TextField(
-              controller: text,
-              focusNode: ex,
+              controller: valor,
+              focusNode: ex1,
+              keyboardType: TextInputType.number,
               strutStyle: const StrutStyle(
                 height: 1.8
               ),
@@ -129,7 +84,7 @@ class _AddState extends State<Add> {
                   horizontal: 15,
                   vertical: 15
                 ),
-                labelText: "Explicação",
+                labelText: "Valor Monetário",
                 labelStyle: const TextStyle(
                   fontSize: 16,
                   color: Colors.grey
@@ -141,14 +96,135 @@ class _AddState extends State<Add> {
                     color: Colors.grey
                   )
                 )
+              ),      
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            myDrop(), 
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              height:60,
+              width: 300,
+              alignment: Alignment.centerLeft,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(width: 1, color: Colors.grey)
               ),
-              
+              child: TextButton(
+                onPressed: () async{
+                  DateTime? newData = await showDatePicker(
+                    context: context, 
+                    initialDate: date, 
+                    firstDate: DateTime(2023), 
+                    lastDate: DateTime(2050)
+                  );
+                  if(newData==null){
+                    return;
+                  }
+                  setState(() {
+                    date=newData;
+                  });
+                },
+                child: Text(
+                  "Data ${date.year}-${date.month}-${date.day}"
+                ),
+              ),
             )
             
           ],
         ),
       ),
     );
+  }
+
+  TextField myTextField(TextEditingController text, FocusNode ex) {
+    return TextField(
+            controller: text,
+            focusNode: ex,
+            strutStyle: const StrutStyle(
+              height: 1.8
+            ),
+            decoration:   InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 15
+              ),
+              labelText: "Explicação",
+              labelStyle: const TextStyle(
+                fontSize: 16,
+                color: Colors.grey
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+                borderSide: const BorderSide(
+                  width: 2,
+                  color: Colors.grey
+                )
+              )
+            ),
+            
+          );
+  }
+
+  Container myDrop() {
+    return Container(
+            height:60,
+            width: 300,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(width: 1, color: Colors.grey)
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DropdownButton<String>(
+                value: dropdownValue,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownValue = newValue!;
+                  });
+                },
+                hint: const Text(
+                  "Selecione uma opção",
+                  style: TextStyle(
+                    color: Colors.grey
+                  ),
+                ),
+                isExpanded: true,
+                dropdownColor: Colors.white,
+                underline: Container(),
+                items: ['food', 'Transfer', 'Education', 'Transportation'].map((String value) {
+                return DropdownMenuItem(
+                  value: value,
+                  child: SizedBox(
+                    child:Row(
+                      children: [
+                        SizedBox(
+                          width: 30,
+                          child: Image.asset("images/$value.png"),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          value,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold
+                          ),
+                        )
+                      ],
+                    )
+                    
+                  ),
+                );
+               }).toList(),
+                         ),
+            )
+          );
   }
 
   Column backContainer() {
