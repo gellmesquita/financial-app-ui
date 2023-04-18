@@ -10,7 +10,17 @@ class Add extends StatefulWidget {
 
 class _AddState extends State<Add> {
   String dropdownValue = 'food';
-  final textEditingController;
+  final TextEditingController text= TextEditingController();
+  FocusNode ex = FocusNode();
+  @override
+  void initState(){
+    super.initState();
+    ex.addListener(() { 
+      setState(() {
+        
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +65,7 @@ class _AddState extends State<Add> {
               width: 300,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(width: 2, color: Colors.grey)
+                border: Border.all(width: 1, color: Colors.grey)
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -106,10 +116,33 @@ class _AddState extends State<Add> {
               )
             ),
             const SizedBox(
-              height: 10,
+              height: 15,
             ),
             TextField(
-
+              controller: text,
+              focusNode: ex,
+              strutStyle: const StrutStyle(
+                height: 1.8
+              ),
+              decoration:   InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 15
+                ),
+                labelText: "Explicação",
+                labelStyle: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: const BorderSide(
+                    width: 2,
+                    color: Colors.grey
+                  )
+                )
+              ),
+              
             )
             
           ],
