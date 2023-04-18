@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:financialapp/screens/statistic.dart';
+import 'package:financialapp/screens/home.dart';
+import 'package:financialapp/screens/add.dart';
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
 
@@ -10,12 +11,16 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int indexColor= 0;
+  List mySCreens= const [Home(), Statistic(), Home(), Statistic()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     body: mySCreens[indexColor],
      floatingActionButton: FloatingActionButton(
       onPressed: () {
-        
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => Add())
+        );
       },
       backgroundColor: const Color(0xff368983),
       child: const Icon(
@@ -74,7 +79,7 @@ class _BottomNavState extends State<BottomNav> {
                 });
               },
               child:  Icon(
-                Icons.person_outline,
+                Icons.person,
                 size:30,
                 color: (indexColor==3) ?const Color(0xff368983): Colors.grey,
               ),
