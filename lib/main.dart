@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:financialapp/widgtes/bottomNavigation.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:financialapp/data/modal/addData.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async{
+  
   runApp(const FinanciallApp());
 }
 

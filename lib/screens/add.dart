@@ -1,5 +1,6 @@
+import 'package:financialapp/data/modal/addData.dart';
 import 'package:flutter/material.dart';
-import 'package:financialapp/data/dataAdd.dart';
+
 
 class Add extends StatefulWidget {
   const Add({super.key});
@@ -10,6 +11,7 @@ class Add extends StatefulWidget {
 
 class _AddState extends State<Add> {
   String dropdownValue = 'food';
+  
   final TextEditingController text= TextEditingController();
   final TextEditingController valor= TextEditingController();
   FocusNode ex = FocusNode();
@@ -105,39 +107,72 @@ class _AddState extends State<Add> {
             const SizedBox(
               height: 15,
             ),
+            myData(),
+            const Spacer(),
             Container(
-              height:60,
-              width: 300,
-              alignment: Alignment.centerLeft,
+              width: 200,
+              height: 60,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(width: 1, color: Colors.grey)
+                borderRadius: BorderRadius.circular(50)
               ),
               child: TextButton(
-                onPressed: () async{
-                  DateTime? newData = await showDatePicker(
-                    context: context, 
-                    initialDate: date, 
-                    firstDate: DateTime(2023), 
-                    lastDate: DateTime(2050)
-                  );
-                  if(newData==null){
-                    return;
-                  }
-                  setState(() {
-                    date=newData;
-                  });
+                onPressed: () {
+                  // Adicione aqui a ação que deseja realizar ao clicar no botão
                 },
-                child: Text(
-                  "Data ${date.year}-${date.month}-${date.day}"
+                style: TextButton.styleFrom(
+                  backgroundColor:  const Color(0xff368983),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)
+                  )
                 ),
-              ),
-            )
-            
+                child: const Text(
+                  'Salvar Informações',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+             ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),   
           ],
         ),
       ),
     );
+  }
+
+  Container myData() {
+    return Container(
+            height:60,
+            width: 300,
+            alignment: Alignment.centerLeft,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(width: 1, color: Colors.grey)
+            ),
+            child: TextButton(
+              onPressed: () async{
+                DateTime? newData = await showDatePicker(
+                  context: context, 
+                  initialDate: date, 
+                  firstDate: DateTime(2023), 
+                  lastDate: DateTime(2050)
+                );
+                if(newData==null){
+                  return;
+                }
+                setState(() {
+                  date=newData;
+                });
+              },
+              child: Text(
+                "Data ${date.year}-${date.month}-${date.day}"
+              ),
+            ),
+          );
   }
 
   TextField myTextField(TextEditingController text, FocusNode ex) {
